@@ -1,0 +1,70 @@
+<head>
+    <!-- ... -->
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+  </head>
+  <body>
+
+    <h1 data-i18n="settings.title">
+        <!--
+        This field will automatically be filled by a translated string with key 'settings.title'.
+        Read more about translations at Internationalization.
+        -->
+    </h1>
+    <p data-i18n="settings.subtitle">
+        <!--
+        This field will also be translated
+        -->
+    </p>
+
+    <fieldset>
+        <legend>Govee API Settings</legend>
+
+        <div class="field row">
+            <label for="apikey">Your API Key</label>
+            <input id="apikey" type="text" value="" />
+        </div>
+        <div class="field row">
+          <label for="pollinterval">Device state poll interval (in ms), increase this if your devices stop working due to rate limiting. Minimum setting is 60 seconds</label>
+          <input id="pollinterval" type="text" value="60000" />
+        </div>
+        <button id="save" class="right">Save settings</button>
+    </fieldset>
+
+
+    <script type="text/javascript">
+
+    // a method named 'onHomeyReady' must be present in your code
+    function onHomeyReady( Homey ){
+
+        // Tell Homey we're ready to be displayed
+        Homey.ready();
+
+        var keyElement = document.getElementById('apikey');
+        var intervalElement = document.getElementById('pollinterval');
+        var saveElement = document.getElementById('save');
+
+        saveElement.addEventListener('click', function(e) {
+          Homey.set('api_key', keyElement.value, function( err ){
+            if( err ) return Homey.alert( err );
+          });
+          Homey.set('poll_interval', intervalElement.value, function( err ){
+            if( err ) return Homey.alert( err );
+          });
+        });
+
+        Homey.get('api_key', function( err, key ) {
+           if( err ) return Homey.alert( err );
+           keyElement.value = key;
+        });
+
+        Homey.get('poll_interval', function( err, pollinterval ) {
+           if( err ) return Homey.alert( err );
+           if(pollinterval < 60000)
+            pollinterval = 60000;
+           intervalElement.value = pollinterval;
+        });
+
+    }
+    </script>
+
+</body>

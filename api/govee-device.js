@@ -8,8 +8,17 @@ class GoveeDevice extends Device {
    */
   async setupDevice() {
     this.data = this.getData();
+
+    //Todo: remove after a while
+    //Note: Fix due to late arrival of this capability in my devices
+    if(this.data.capabilitieslist.includes('color') && this.data.capabilitieslist.includes('colorTem'))
+    {
+      if(!this.hasCapability('light_mode'))
+        await this.addCapability('light_mode');
+    }
+
     this.setupCapabilities();
-    this.log('govee.device.'+this.data.model+': '+this.data.name+' has been setup');
+    this.log('govee.device.'+this.data.model+': '+this.data.name+' of type '+this.goveedevicetype+' has been setup');
     this.log(this.icon);
     this.refreshState();
     this.start_update_loop();
@@ -30,7 +39,7 @@ class GoveeDevice extends Device {
   async refreshState()
   {
     this.log('govee.device.'+this.data.model+': '+this.data.name+' device state to be retrieved');
-    this.driver.deviceState(this.data.model, this.data.mac).then(currentState => {
+    this.driver.deviceState(this.data.model, this.data.mac, this.goveedevicetype).then(currentState => {
       console.log(JSON.stringify(currentState.properties));
       //Now update the capabilities with the actual state
       if (this.hasCapability('onoff'))
@@ -61,8 +70,12 @@ class GoveeDevice extends Device {
           var rangePerc = (colorTem['colorTem']-rangeMin)/rangeTotal;
           if (rangePerc>1) rangePerc = 1; //Seems that sometimes this math ends up in a higher than 1 result, strange but without more data hard to locate.
           this.setCapabilityValue('light_temperature', rangePerc);
+          if(this.hasCapability('light_mode'))
+            this.setCapabilityValue('light_mode', 'temperature'); //Tell homey we are in colorTemp mode
         } else {
           console.log('no color temp known');
+          if(this.hasCapability('light_mode'))
+            this.setCapabilityValue('light_mode', 'color'); //Tell homey we are not in colorTemp mode
           this.setCapabilityValue('light_temperature', null);
         }
       }
@@ -73,13 +86,30 @@ class GoveeDevice extends Device {
         {
           var colorHSV=this.driver.colorCommandGetParser(colorRGB['color']);
           console.log(JSON.stringify(colorHSV))
+          if(this.hasCapability('light_mode'))
+            this.setCapabilityValue('light_mode', 'color'); //Tell homey we are in color mode
           this.setCapabilityValue('light_saturation', colorHSV.s);
           this.setCapabilityValue('light_hue', (colorHSV.h/360));
         }
         else {
           console.log('no color rgb known');
+          if(this.hasCapability('light_mode'))
+            this.setCapabilityValue('light_mode', 'temperature'); //Tell homey we are not in color mode
           this.setCapabilityValue('light_hue', null);
           this.setCapabilityValue('light_saturation', null);
+        }
+      }
+      if(this.hasCapability('mode'))
+      {
+        var mode = currentState.properties.find(property => { return property['mode'] != undefined })
+        if(mode!=null && mode!=undefined)
+        {
+          //How to read modes?
+          this.setCapabilityValue('mode', this.data.properties.mode);
+        }
+        else {
+          //How to read modes?
+          this.setCapabilityValue('mode', null);
         }
       }
     }).catch((err) => console.log('Error calling the state endpoint ['+JSON.stringify(err)+']'));
@@ -105,9 +135,36 @@ class GoveeDevice extends Device {
       if(!this.hasCapability('light_hue'))
         await this.addCapability('light_hue');    
     }
+
     if(this.data.capabilitieslist.includes('colorTem'))
       if(!this.hasCapability('light_temperature'))
         await this.addCapability('light_temperature');
+    if(this.data.capabilitieslist.includes('color') && this.data.capabilitieslist.includes('colorTem'))
+    {
+      if(!this.hasCapability('light_mode'))
+        await this.addCapability('light_mode');
+    }
+    if(this.data.capabilitieslist.includes('mode'))
+		  if(!this.hasCapability('mode'))
+      {
+        let modeValues = this.data.properties.mode.options;
+        //TODO: Configure the mode capability with the possible modes
+			  await this.addCapability('mode');
+
+        let optvalues = modeValues.map((modevalueoption) => {
+            let value = {
+              id: modevalueoption.value,
+              title: {
+                en: modevalueoption.name
+              } 
+          }
+          return value;
+        });
+        let options = {
+          values: optvalues
+        }
+        setCapabilityOptions('mode', options)
+      }
     this.setupCapabilities();
   }
 
@@ -132,6 +189,10 @@ class GoveeDevice extends Device {
       if (this.hasCapability('light_hue'))
         this.registerCapabilityListener('light_hue', this.onCapabilityHue.bind(this));
     }
+    if (this.hasCapability('light_mode'))
+      this.registerCapabilityListener('light_mode', this.onCapabilityLightMode.bind(this));
+    if (this.hasCapability('mode'))
+      this.registerCapabilityListener('mode', this.onCapabilityMode.bind(this));
   }
 
   /**
@@ -172,12 +233,26 @@ class GoveeDevice extends Device {
    */
   async onCapabilityOnoff( value, opts ) {
     if(value){
-      await this.driver.turn('on',this.data.model, this.data.mac);
+      await this.driver.turn('on',this.data.model, this.data.mac, this.goveedevicetype);
     } else {
-      await this.driver.turn('off',this.data.model, this.data.mac);
+      await this.driver.turn('off',this.data.model, this.data.mac, this.goveedevicetype);
     }
     this.setIfHasCapability('onoff', value);
   }
+
+  /**
+   * Switches the device to a different mode
+   * @param {string} value the mode value of the device
+   * @param {*} opts 
+   */
+    async onCapabilityMode( value, opts ) {
+      if(value){
+        await this.driver.mode('on',this.data.model, this.data.mac, this.goveedevicetype);
+      } else {
+        await this.driver.mode('off',this.data.model, this.data.mac, this.goveedevicetype);
+      }
+      this.setIfHasCapability('mode', value);
+    }
 
   /**
    * Sets the device to the desired brightness level
@@ -246,6 +321,23 @@ class GoveeDevice extends Device {
       this.setIfHasCapability('light_temperature', value);
     }
   }
+
+    /**
+   * Sets the Light mode for color or tempurature
+   * @param {string} value The light mode from the enum color,temperature
+   * @param {*} opts 
+   */
+    async onCapabilityLightMode( value, opts ) {
+      console.log("Capability trigger: Switch light modes");
+      this.setIfHasCapability('light_mode', value);
+      if(value=='temperature'){
+        var colorTemp = this.getCapabilityValue('light_temperature');
+        await this.onCapabilityLightTemperature(colorTemp);
+      } else if (value=='color'){
+        var hue = this.getState().light_hue;  
+        await this.onCapabilityHue(hue);
+      }
+    }
 
   setIfHasCapability(cap, value) {
     if (this.hasCapability(cap)) {

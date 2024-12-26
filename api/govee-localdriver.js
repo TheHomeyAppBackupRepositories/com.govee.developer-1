@@ -3,6 +3,7 @@
 const { Driver } = require('homey');
 const tinycolor = require('tinycolor2');
 const gv = require('./govee-localapi');
+const gvCloud = require('./govee-api-v2');
 
 
 class GoveeDriver extends Driver {
@@ -10,8 +11,16 @@ class GoveeDriver extends Driver {
    * onInit is called when the driver is initialized.
    */
   async onInit() {
-    this.api = new gv.GoveeClient();
+    if(this.homey.app.localApiClient===null)
+      this.homey.app.localApiClient = new gv.GoveeClient();
     this.log('govee.localdriver has been initialized');
+  }
+
+  async cloudInit()
+  {
+    this.coudapi = new gvCloud.GoveeClient({
+      api_key: this.homey.settings.get('api_key')
+    });
   }
 
   /**
@@ -19,10 +28,10 @@ class GoveeDriver extends Driver {
    * This should return an array with the data of devices that are available for pairing.
    */
   async ListDevices() {
-    console.log('List available devices');
+    this.log('List available devices');
     var devicelist = null;
-    devicelist = await this.api.deviceList();
-    console.log('Received '+devicelist.length+' from local discovery');
+    devicelist = await this.homey.app.localApiClient.deviceList();
+    this.log('Received '+devicelist.length+' from local discovery');
     //Convert to our Homey device info object
     var devices = await devicelist.map((device) => {
       let goveedevice = {
@@ -36,23 +45,23 @@ class GoveeDriver extends Driver {
           capabilitieslist: device.state
         }
       }
-      console.log('device located: '+JSON.stringify(goveedevice));
+      this.log('device located: '+JSON.stringify(goveedevice));
       return goveedevice;
     });
-    console.log ('listed: '+devices.length+' govee devices');
+    this.log ('listed: '+devices.length+' govee devices');
     return devices;
   }
 
   async turn(mode, deviceid) {
-      console.log('device ('+deviceid+') state change requested ['+mode+']');
-      return this.api.devicesTurn(mode,deviceid);
+      this.log('device ('+deviceid+') state change requested ['+mode+']');
+      return this.homey.app.localApiClient.devicesTurn(mode,deviceid);
   }
 
   async brightness(dim, deviceid) {
     //Correct dim level from percentage to the range 0-100
     var correctDimLevel = (dim*100);
-		console.log('device ('+deviceid+') brightness change requested ['+correctDimLevel+']');
-    return this.api.brightness(correctDimLevel, deviceid);
+		this.log('device ('+deviceid+') brightness change requested ['+correctDimLevel+']');
+    return this.homey.app.localApiClient.brightness(correctDimLevel, deviceid);
   }
 
   async colorTemp(colortemp, deviceid) {
@@ -61,8 +70,8 @@ class GoveeDriver extends Driver {
     let color = {
       kelvin: colortemp
     }
-		console.log('device ('+deviceid+') color temp change requested ['+colortemp+'] converted to color ['+JSON.stringify(color)+']');
-    return this.api.color(color, deviceid);
+		this.log('device ('+deviceid+') color temp change requested ['+colortemp+'] converted to color ['+JSON.stringify(color)+']');
+    return this.homey.app.localApiClient.color(color, deviceid);
   }
 
   async color(hue, sat, light, deviceid) {
@@ -71,8 +80,14 @@ class GoveeDriver extends Driver {
     let color = {
       rgb: [rgb.r, rgb.g, rgb.b]
     }
-		console.log('device ('+deviceid+') color change requested ['+hue+','+sat+','+light+'] converted to color ['+JSON.stringify(color)+']');
-    return this.api.color(color, deviceid);
+		this.log('device ('+deviceid+') color change requested ['+hue+','+sat+','+light+'] converted to color ['+JSON.stringify(color)+']');
+    return this.homey.app.localApiClient.color(color, deviceid);
+  }
+
+  colorHexCommandSetParser( colorStr ) {
+    var colorhex = tinycolor(colorStr);
+    //this.log("attempt to convert "+colorStr+" mapped to "+colorhex.toHex());
+    return colorhex.toHex();
   }
 
   colorCommandSetParser( hue, sat, light ) {
@@ -93,6 +108,64 @@ class GoveeDriver extends Driver {
     }).toHsv();
     return hsv;
   }
+
+  /**
+   * The follwing methods are for cloud enhanced devices
+   * Should be a copy of the driver-v2 methods
+   */
+
+  async toggle(mode, instance, model, device, type) {
+		this.log('device toggle requested ['+mode+'] for intance '+instance);
+    return this.coudapi.devicesToggle(mode, instance, model, device);
+  }
+
+  async deviceLightModes(model, device) {
+    return this.coudapi.lightModes(model, device).then( device => {
+      let deviceState = {
+        id: device.device,
+        model: device.sku,
+        capabilitieslist:device.capabilities
+      }
+      return deviceState;
+    });
+  }
+
+  async deviceDiyLightModes(model, device) {
+    return this.coudapi.diyLightModes(model, device).then( device => {
+      let deviceState = {
+        id: device.device,
+        model: device.sku,
+        capabilitieslist:device.capabilities
+      }
+      return deviceState;
+    });
+  }
+
+  async setLightScene(scene, instance, model, device, type) {
+		this.log('device light scene requested ['+scene+'] for intance '+instance);
+    return this.coudapi.setLightScene(scene, instance, model, device);
+  }
+
+  async setMusicMode(musicMode, sensitivity, model, device) {
+		this.log('device music mode requested ['+musicMode+'|'+sensitivity+']');
+    return this.coudapi.setMusicMode(musicMode, sensitivity, model, device);
+  }
+
+  async setSegmentColor(segment, colorHex, mode, model, device, type) {
+    let colorParsed = this.colorHexCommandSetParser(colorHex);
+    this.log('device segment change requested ['+segment+'] to color '+colorParsed);
+    return this.coudapi.setSegmentColor(segment, parseInt(colorParsed, 16), mode, model, device);
+  }
+  async setSegmentBrightness(segment, brightness, mode, model, device, type) {
+    this.log('device segment change requested ['+segment+'] to brightness '+brightness);
+    return this.coudapi.setSegmentBrightness(segment, brightness, mode, model, device);
+  }
+
+  async setSegmentBrightness(segment ,brightness, mode, model, device, type) {
+    this.log('device segment change requested ['+segment+'] to brightness '+brightness);
+    return this.coudapi.setSegmentBrightness(segment ,brightness, mode, model, device);
+  }
 }
+
 
 module.exports = GoveeDriver;

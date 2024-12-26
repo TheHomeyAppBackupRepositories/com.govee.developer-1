@@ -2,9 +2,13 @@
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.govee.developer",
   "brandColor": "#00ACE7",
-  "version": "2.5.4",
-  "compatibility": ">=5.0.0",
+  "version": "2.11.8",
+  "compatibility": ">=12.0.0",
   "sdk": 3,
+  "platforms": [
+    "local",
+    "cloud"
+  ],
   "name": {
     "en": "Govee"
   },
@@ -14,7 +18,8 @@
   "homeyCommunityTopicId": 50660,
   "source": "https://github.com/kaohlive/com.govee.developer",
   "category": [
-    "lights"
+    "lights",
+    "appliances"
   ],
   "permissions": [],
   "images": {
@@ -23,23 +28,2136 @@
     "xlarge": "/assets/images/xlarge.png"
   },
   "author": {
-    "name": "Vincent Boer"
+    "name": "Govee Moments"
+  },
+  "support": "mailto:vincent+govee@vdboer.nl",
+  "flow": {
+    "triggers": [
+      {
+        "id": "alarm_online.air_purifier_false",
+        "title": {
+          "en": "The air purifier is online"
+        },
+        "hint": {
+          "en": "When the air purifier is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-airpurifier&capabilities=alarm_online.air_purifier"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.air_purifier_true",
+        "title": {
+          "en": "The air purifier is offline"
+        },
+        "hint": {
+          "en": "When the air purifier is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-airpurifier&capabilities=alarm_online.air_purifier"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.appliance_false",
+        "title": {
+          "en": "The appliance is online"
+        },
+        "hint": {
+          "en": "When the appliance is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-appliance&capabilities=alarm_online.appliance"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.appliance_true",
+        "title": {
+          "en": "The appliance is offline"
+        },
+        "hint": {
+          "en": "When the appliance is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-appliance&capabilities=alarm_online.appliance"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.aroma_diffuser_false",
+        "title": {
+          "en": "The aroma diffuser is online"
+        },
+        "hint": {
+          "en": "When the aroma diffuser is online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-aromadiffuser&capabilities=alarm_online.aroma_diffuser"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.aroma_diffuser_true",
+        "title": {
+          "en": "The aroma diffuser is offline"
+        },
+        "hint": {
+          "en": "When the aroma diffuser is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-aromadiffuser&capabilities=alarm_online.aroma_diffuser"
+          }
+        ]
+      },
+      {
+        "id": "event_lackWater.aroma_diffuser",
+        "title": {
+          "en": "The aroma diffures is lacking water"
+        },
+        "hint": {
+          "en": "When the aroma diffuser generates the lacking water event"
+        },
+        "tokens": [
+          {
+            "name": "lack",
+            "type": "number",
+            "title": {
+              "en": "Water lacking"
+            },
+            "example": 1
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Event message"
+            },
+            "example": {
+              "en": "Lack of Water"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-aromadiffuser&capabilities=lackWater.aroma_diffuser"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.box_false",
+        "title": {
+          "en": "The box is online"
+        },
+        "hint": {
+          "en": "When the box is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-box&capabilities=alarm_online.box"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.box_true",
+        "title": {
+          "en": "The box is offline"
+        },
+        "hint": {
+          "en": "When the box is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-box&capabilities=alarm_online.box"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.dehumidifier_false",
+        "title": {
+          "en": "The dehumidifier is online"
+        },
+        "hint": {
+          "en": "When the dehumidifier is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-dehumidifier&capabilities=alarm_online.dehumidifier"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.dehumidifier_true",
+        "title": {
+          "en": "The dehumidifier is offline"
+        },
+        "hint": {
+          "en": "When the dehumidifier is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-dehumidifier&capabilities=alarm_online.dehumidifier"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.light_false",
+        "title": {
+          "en": "The light is online"
+        },
+        "hint": {
+          "en": "When the light is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=alarm_online.light"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.light_true",
+        "title": {
+          "en": "The light is offline"
+        },
+        "hint": {
+          "en": "When the light is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=alarm_online.light"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.heater_false",
+        "title": {
+          "en": "The heater is online"
+        },
+        "hint": {
+          "en": "When the heater is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=alarm_online.heater"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.heater_true",
+        "title": {
+          "en": "The heater is offline"
+        },
+        "hint": {
+          "en": "When the heater is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=alarm_online.heater"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.humidifier_false",
+        "title": {
+          "en": "The humidifier is online"
+        },
+        "hint": {
+          "en": "When the humidifier is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=alarm_online.humidifier"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.humidifier_true",
+        "title": {
+          "en": "The humidifier is offline"
+        },
+        "hint": {
+          "en": "When the humidifier is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=alarm_online.humidifier"
+          }
+        ]
+      },
+      {
+        "id": "event_lackWater.humidifier",
+        "title": {
+          "en": "The humidifier is lacking water"
+        },
+        "hint": {
+          "en": "When the humidifier generates the lacking water event"
+        },
+        "tokens": [
+          {
+            "name": "lack",
+            "type": "number",
+            "title": {
+              "en": "Water lacking"
+            },
+            "example": 1
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Event message"
+            },
+            "example": {
+              "en": "Lack of Water"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=lackWater.humidifier"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.ice_maker_false",
+        "title": {
+          "en": "The ice maker is online"
+        },
+        "hint": {
+          "en": "When the ice maker is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-icemaker&capabilities=alarm_online.ice_maker"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.ice_maker_true",
+        "title": {
+          "en": "The ice maker is offline"
+        },
+        "hint": {
+          "en": "When the ice maker is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-icemaker&capabilities=alarm_online.ice_maker"
+          }
+        ]
+      },
+      {
+        "id": "event_lackWater.ice_maker",
+        "title": {
+          "en": "The ice maker is lacking water"
+        },
+        "hint": {
+          "en": "When the ice maker generates the lacking water event"
+        },
+        "tokens": [
+          {
+            "name": "lack",
+            "type": "number",
+            "title": {
+              "en": "Water lacking"
+            },
+            "example": 1
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "title": {
+              "en": "Event message"
+            },
+            "example": {
+              "en": "Lack of Water"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-icemaker&capabilities=lackWater.ice_maker"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.sensor_false",
+        "title": {
+          "en": "The sensor is online"
+        },
+        "hint": {
+          "en": "When the sensor is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-sensor&capabilities=alarm_online.sensor"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.sensor_true",
+        "title": {
+          "en": "The sensor is offline"
+        },
+        "hint": {
+          "en": "When the sensor is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-sensor&capabilities=alarm_online.sensor"
+          }
+        ]
+      },
+      {
+        "id": "event_bodyAppearedEvent.sensor",
+        "title": {
+          "en": "The presence state changed"
+        },
+        "hint": {
+          "en": "When the presence state changes, for example presence is newly detected or no longer detected"
+        },
+        "tokens": [
+          {
+            "name": "presence",
+            "type": "number",
+            "title": {
+              "en": "Is the body present"
+            },
+            "example": 1
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-sensor&capabilities=bodyAppeared.sensor"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.socket_false",
+        "title": {
+          "en": "The socket is online"
+        },
+        "hint": {
+          "en": "When the socket is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-socket&capabilities=alarm_online.socket"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.socket_true",
+        "title": {
+          "en": "The socket is offline"
+        },
+        "hint": {
+          "en": "When the socket is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-socket&capabilities=alarm_online.socket"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.thermometer_false",
+        "title": {
+          "en": "The thermometer is online"
+        },
+        "hint": {
+          "en": "When the thermometer is reported online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-thermometer&capabilities=alarm_online.thermometer"
+          }
+        ]
+      },
+      {
+        "id": "alarm_online.thermometer_true",
+        "title": {
+          "en": "The thermometer is offline"
+        },
+        "hint": {
+          "en": "When the thermometer is reported to be offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-thermometer&capabilities=alarm_online.thermometer"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "set-work-mode.air_purifier",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the air purifier"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-airpurifier&capabilities=workMode.air_purifier"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-music-mode.appliance",
+        "title": {
+          "en": "Activate music mode"
+        },
+        "hint": {
+          "en": "Activates the music mode in the specified mode and sensitivity"
+        },
+        "titleFormatted": {
+          "en": "Activate music mode [[musicMode]] with sensitivity [[sensitivity]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-appliance&capabilities=musicMode.appliance"
+          },
+          {
+            "type": "autocomplete",
+            "name": "musicMode",
+            "title": {
+              "en": "Music mode"
+            },
+            "placeholder": {
+              "en": "Music mode"
+            }
+          },
+          {
+            "type": "range",
+            "name": "sensitivity",
+            "title": {
+              "en": "Sensituvity"
+            },
+            "placeholder": {
+              "en": "Sensitivity"
+            },
+            "labelDecimals": 0,
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "%",
+            "labelMultiplier": 1
+          }
+        ]
+      },
+      {
+        "id": "activate-snapshot.appliance",
+        "title": {
+          "en": "Activate snapshot"
+        },
+        "hint": {
+          "en": "Activates a previously created snapshot for yor appliance configuration"
+        },
+        "titleFormatted": {
+          "en": "Activate snapshot [[snapshot]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-appliance&capabilities=snapshots.appliance"
+          },
+          {
+            "type": "autocomplete",
+            "name": "snapshot",
+            "title": {
+              "en": "Snapshot"
+            },
+            "placeholder": {
+              "en": "game setup"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-work-mode.appliance",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the appliance"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-appliance&capabilities=workMode.appliance"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-work-mode.aroma_diffuser",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the aroma diffuser"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-aromadiffuser&capabilities=workMode.aroma_diffuser"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-work-mode.dehumidifier",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the dehumidifier"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-dehumidifier&capabilities=workMode.dehumidifier"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-dreamview.light",
+        "title": {
+          "en": "Toggle the dream view mode"
+        },
+        "titleFormatted": {
+          "en": "Activate the dreamview mode [[activate]]"
+        },
+        "titleTrue": {
+          "en": "Activate dream view mode"
+        },
+        "titleFalse": {
+          "en": "Deactivate dream view mode"
+        },
+        "insightsTitleTrue": {
+          "en": "Dream view mode was activated"
+        },
+        "insightsTitleTFalse": {
+          "en": "Dream view mode was deactivated"
+        },
+        "hint": {
+          "en": "Activates or deactivates the dream view mode that is supported by the light (music or video)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=dreamViewToggle.light"
+          },
+          {
+            "type": "checkbox",
+            "name": "activate",
+            "title": {
+              "en": "Activate"
+            },
+            "placeholder": {
+              "en": "Activate"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-music-mode.light",
+        "title": {
+          "en": "Activate music mode"
+        },
+        "hint": {
+          "en": "Activates the music mode in the specified mode and sensitivity"
+        },
+        "titleFormatted": {
+          "en": "Activate music mode [[musicMode]] with sensitivity [[sensitivity]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=musicMode.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "musicMode",
+            "title": {
+              "en": "Music mode"
+            },
+            "placeholder": {
+              "en": "Music mode"
+            }
+          },
+          {
+            "type": "range",
+            "name": "sensitivity",
+            "title": {
+              "en": "Sensituvity"
+            },
+            "placeholder": {
+              "en": "Sensitivity"
+            },
+            "labelDecimals": 0,
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "%",
+            "labelMultiplier": 1
+          }
+        ]
+      },
+      {
+        "id": "activate-snapshot.light",
+        "title": {
+          "en": "Activate snapshot"
+        },
+        "hint": {
+          "en": "Activates a previously created snapshot for yor light configuration"
+        },
+        "titleFormatted": {
+          "en": "Activate snapshot [[snapshot]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=snapshots.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "snapshot",
+            "title": {
+              "en": "Snapshot"
+            },
+            "placeholder": {
+              "en": "game setup"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-segment-brightness.light",
+        "title": {
+          "en": "Control the brightness of a segment of the light"
+        },
+        "hint": {
+          "en": "Use the dropdown to set a specific segment to one color, or use the Segment List input to list one or multiple segments to set to a specific brightness"
+        },
+        "titleFormatted": {
+          "en": "Set [[segmentNr]] or segments [[segmentArray]] to brightness [[segmentBrightness]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=segmentControlBrightness.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "segmentNr",
+            "title": {
+              "en": "Segment"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Segment"
+            }
+          },
+          {
+            "type": "text",
+            "name": "segmentArray",
+            "title": {
+              "en": "Segment list"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "1,3,5,..."
+            }
+          },
+          {
+            "type": "range",
+            "name": "segmentBrightness",
+            "title": {
+              "en": "Segment brightness"
+            },
+            "labelDecimals": 0,
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "%",
+            "labelMultiplier": 1,
+            "placeholder": {
+              "en": "Brightness"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-segment-color.light",
+        "title": {
+          "en": "Control the color of a segment of the light"
+        },
+        "hint": {
+          "en": "Use the dropdown to set a specific segment to one color, or use the Segment List input to list one or multiple segments to set to a specific color."
+        },
+        "titleFormatted": {
+          "en": "Set [[segmentNr]] or segments [[segmentArray]] to color [[segmentColor]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=segmentControlColor.light"
+          },
+          {
+            "type": "color",
+            "name": "segmentColor",
+            "title": {
+              "en": "Segment color"
+            },
+            "placeholder": {
+              "en": "Red"
+            }
+          },
+          {
+            "type": "text",
+            "name": "segmentArray",
+            "title": {
+              "en": "Segment list"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "1,3,5,..."
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "segmentNr",
+            "title": {
+              "en": "Segment"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Segment"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-diy-light-scene.light",
+        "title": {
+          "en": "Switch to diy scene"
+        },
+        "hint": {
+          "en": "Switches to the selected DIY scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to DIY scene [[diyScene]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=lightDiyScenes.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "diyScene",
+            "title": {
+              "en": "DIY Scene"
+            },
+            "placeholder": {
+              "en": "Valantine special"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-random-diy-light-scene.light",
+        "title": {
+          "en": "Switch to random diy scene"
+        },
+        "hint": {
+          "en": "Switches to a random diy scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to random diy scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=lightDiyScenes.light"
+          }
+        ]
+      },
+      {
+        "id": "switch-to-light-scene.light",
+        "title": {
+          "en": "Switch to light scene"
+        },
+        "hint": {
+          "en": "Switches to the selected light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to light scene [[lightScene]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=lightScenes.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "lightScene",
+            "title": {
+              "en": "Scene"
+            },
+            "placeholder": {
+              "en": "Sunset glow"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-random-light-scene.light",
+        "title": {
+          "en": "Switch to random light scene"
+        },
+        "hint": {
+          "en": "Switches to a random light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to random light scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=lightScenes.light"
+          }
+        ]
+      },
+      {
+        "id": "set-work-mode.heater",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the heater"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=workMode.heater"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-nightlight.heater",
+        "title": {
+          "en": "Toggle the nightlight"
+        },
+        "titleFormatted": {
+          "en": "Activate the nightlight [[activate]]"
+        },
+        "titleTrue": {
+          "en": "Activate nightlight"
+        },
+        "titleFalse": {
+          "en": "Deactivate nightlight"
+        },
+        "insightsTitleTrue": {
+          "en": "Nightlight was activated"
+        },
+        "insightsTitleTFalse": {
+          "en": "Nightlight was deactivated"
+        },
+        "hint": {
+          "en": "Activates or deactivates the nightlight"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=nightlightToggle.heater"
+          },
+          {
+            "type": "checkbox",
+            "name": "activate",
+            "title": {
+              "en": "Activate"
+            },
+            "placeholder": {
+              "en": "Activate"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-nightlight-scene.heater",
+        "title": {
+          "en": "Switch to light scene"
+        },
+        "hint": {
+          "en": "Switches to the selected light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to light scene [[nightlightScene]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=nightlightScenes.heater"
+          },
+          {
+            "type": "autocomplete",
+            "name": "nightlightScene",
+            "title": {
+              "en": "Scene"
+            },
+            "placeholder": {
+              "en": "Sunset glow"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-random-nightlight-scene.heater",
+        "title": {
+          "en": "Switch to random light scene"
+        },
+        "hint": {
+          "en": "Switches to a random light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to random light scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=nightlightScenes.heater"
+          }
+        ]
+      },
+      {
+        "id": "set-work-mode.humidifier",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the humidifier"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=workMode.humidifier"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-nightlight.humidifier",
+        "title": {
+          "en": "Toggle the nightlight"
+        },
+        "titleFormatted": {
+          "en": "Activate the nightlight [[activate]]"
+        },
+        "titleTrue": {
+          "en": "Activate nightlight"
+        },
+        "titleFalse": {
+          "en": "Deactivate nightlight"
+        },
+        "insightsTitleTrue": {
+          "en": "Nightlight was activated"
+        },
+        "insightsTitleTFalse": {
+          "en": "Nightlight was deactivated"
+        },
+        "hint": {
+          "en": "Activates or deactivates the nightlight"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=nightlightToggle.humidifier"
+          },
+          {
+            "type": "checkbox",
+            "name": "activate",
+            "title": {
+              "en": "Activate"
+            },
+            "placeholder": {
+              "en": "Activate"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-nightlight-scene.humidifier",
+        "title": {
+          "en": "Switch to light scene"
+        },
+        "hint": {
+          "en": "Switches to the selected light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to light scene [[nightlightScene]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=nightlightScenes.humidifier"
+          },
+          {
+            "type": "autocomplete",
+            "name": "nightlightScene",
+            "title": {
+              "en": "Scene"
+            },
+            "placeholder": {
+              "en": "Sunset glow"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-random-nightlight-scene.humidifier",
+        "title": {
+          "en": "Switch to random light scene"
+        },
+        "hint": {
+          "en": "Switches to a random light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to random light scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=nightlightScenes.humidifier"
+          }
+        ]
+      },
+      {
+        "id": "set-work-mode.ice_maker",
+        "title": {
+          "en": "Select work mode"
+        },
+        "hint": {
+          "en": "Sets the work mode of the ice maker"
+        },
+        "titleFormatted": {
+          "en": "Set the work mode to [[workMode]] with option [[modeValue]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-icemaker&capabilities=workMode.ice_maker"
+          },
+          {
+            "type": "autocomplete",
+            "name": "workMode",
+            "title": {
+              "en": "Work mode"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "modeValue",
+            "title": {
+              "en": "Option"
+            },
+            "placeholder": {
+              "en": "Work mode"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-dreamview.localdevice",
+        "title": {
+          "en": "Toggle the dream view mode"
+        },
+        "titleFormatted": {
+          "en": "Activate the dreamview mode [[activate]]"
+        },
+        "titleTrue": {
+          "en": "Activate dream view mode"
+        },
+        "titleFalse": {
+          "en": "Deactivate dream view mode"
+        },
+        "insightsTitleTrue": {
+          "en": "Dream view mode was activated"
+        },
+        "insightsTitleTFalse": {
+          "en": "Dream view mode was deactivated"
+        },
+        "hint": {
+          "en": "Activates or deactivates the dream view mode that is supported by the light (music or video)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=dreamViewToggle.localdevice"
+          },
+          {
+            "type": "checkbox",
+            "name": "activate",
+            "title": {
+              "en": "Activate"
+            },
+            "placeholder": {
+              "en": "Activate"
+            }
+          }
+        ]
+      },
+      {
+        "id": "activate-music-mode.localdevice",
+        "title": {
+          "en": "Activate music mode"
+        },
+        "hint": {
+          "en": "Activates the music mode in the specified mode and sensitivity"
+        },
+        "titleFormatted": {
+          "en": "Activate music mode [[musicMode]] with sensitivity [[sensitivity]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=musicMode.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "musicMode",
+            "title": {
+              "en": "Music mode"
+            },
+            "placeholder": {
+              "en": "Music mode"
+            }
+          },
+          {
+            "type": "range",
+            "name": "sensitivity",
+            "title": {
+              "en": "Sensituvity"
+            },
+            "placeholder": {
+              "en": "Sensitivity"
+            },
+            "labelDecimals": 0,
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "%",
+            "labelMultiplier": 1
+          }
+        ]
+      },
+      {
+        "id": "activate-snapshot.localdevice",
+        "title": {
+          "en": "Activate snapshot"
+        },
+        "hint": {
+          "en": "Activates a previously created snapshot for yor light configuration"
+        },
+        "titleFormatted": {
+          "en": "Activate snapshot [[snapshot]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=snapshots.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "snapshot",
+            "title": {
+              "en": "Snapshot"
+            },
+            "placeholder": {
+              "en": "game setup"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-segment-brightness.localdevice",
+        "title": {
+          "en": "Control the brightness of a segment of the light"
+        },
+        "hint": {
+          "en": "Sets the segment to a specific brightness"
+        },
+        "titleFormatted": {
+          "en": "Set [[segmentNr]] or segments [[segmentArray]] to brightness [[segmentBrightness]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=segmentControlBrightness.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "segmentNr",
+            "title": {
+              "en": "Segment"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Segment"
+            }
+          },
+          {
+            "type": "text",
+            "name": "segmentArray",
+            "title": {
+              "en": "Segment list"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "1,3,5,..."
+            }
+          },
+          {
+            "type": "range",
+            "name": "segmentBrightness",
+            "title": {
+              "en": "Segment brightness"
+            },
+            "labelDecimals": 0,
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "%",
+            "labelMultiplier": 1,
+            "placeholder": {
+              "en": "Brightness"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set-segment-color.localdevice",
+        "title": {
+          "en": "Control the color of a segment of the light"
+        },
+        "hint": {
+          "en": "Use the dropdown to set a specific segment to one color, or use the Segment List input to list one or multiple segments to set to a specific brightness."
+        },
+        "titleFormatted": {
+          "en": "Set [[segmentNr]] or segments [[segmentArray]] to color [[segmentColor]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=segmentControlColor.localdevice"
+          },
+          {
+            "type": "color",
+            "name": "segmentColor",
+            "title": {
+              "en": "Segment color"
+            },
+            "placeholder": {
+              "en": "Red"
+            }
+          },
+          {
+            "type": "text",
+            "name": "segmentArray",
+            "title": {
+              "en": "Segment list"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "1,3,5,..."
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "segmentNr",
+            "title": {
+              "en": "Segment"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Segment"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-diy-light-scene.localdevice",
+        "title": {
+          "en": "Switch to diy scene"
+        },
+        "hint": {
+          "en": "Switches to the selected DIY scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to DIY scene [[diyScene]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=lightDiyScenes.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "diyScene",
+            "title": {
+              "en": "DIY Scene"
+            },
+            "placeholder": {
+              "en": "Valantine special"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-random-diy-light-scene.localdevice",
+        "title": {
+          "en": "Switch to random diy scene"
+        },
+        "hint": {
+          "en": "Switches to a random diy scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to random diy scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=lightDiyScenes.localdevice"
+          }
+        ]
+      },
+      {
+        "id": "switch-to-light-scene.localdevice",
+        "title": {
+          "en": "Switch to light scene"
+        },
+        "hint": {
+          "en": "Switches to the selected light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to light scene [[lightScene]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=lightScenes.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "lightScene",
+            "title": {
+              "en": "Scene"
+            },
+            "placeholder": {
+              "en": "Sunset glow"
+            }
+          }
+        ]
+      },
+      {
+        "id": "switch-to-random-light-scene.localdevice",
+        "title": {
+          "en": "Switch to random light scene"
+        },
+        "hint": {
+          "en": "Switches to a random light scene (and turns on the light if off)"
+        },
+        "titleFormatted": {
+          "en": "Switch to random light scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=lightScenes.localdevice"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "lightDiyscene-active.light",
+        "title": {
+          "en": "A specific DIY scene is active"
+        },
+        "titleFormatted": {
+          "en": "The DIY scene [[diyScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active DIY scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=lightDiyScenes.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "diyScene",
+            "title": {
+              "en": "DIY scene"
+            },
+            "placeholder": {
+              "en": "DIY scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "lightscene-active.light",
+        "title": {
+          "en": "A specific light scene is active"
+        },
+        "titleFormatted": {
+          "en": "The light scene [[lightScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active light scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=lightScenes.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "lightScene",
+            "title": {
+              "en": "Light scene"
+            },
+            "placeholder": {
+              "en": "Light scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nightlightscene-active.light",
+        "title": {
+          "en": "A specific nightlight scene is active"
+        },
+        "titleFormatted": {
+          "en": "The nightlight scene [[nightlightScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active nightlight scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-device&capabilities=nightlightScenes.light"
+          },
+          {
+            "type": "autocomplete",
+            "name": "nightlightScene",
+            "title": {
+              "en": "Nightlight scene"
+            },
+            "placeholder": {
+              "en": "Nightlight scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nightlightscene-active.heater",
+        "title": {
+          "en": "A specific nightlight scene is active"
+        },
+        "titleFormatted": {
+          "en": "The nightlight scene [[nightlightScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active nightlight scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-heater&capabilities=nightlightScenes.heater"
+          },
+          {
+            "type": "autocomplete",
+            "name": "nightlightScene",
+            "title": {
+              "en": "Nightlight scene"
+            },
+            "placeholder": {
+              "en": "Nightlight scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nightlightscene-active.humidifier",
+        "title": {
+          "en": "A specific nightlight scene is active"
+        },
+        "titleFormatted": {
+          "en": "The nightlight scene [[nightlightScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active nightlight scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-humidifier&capabilities=nightlightScenes.humidifier"
+          },
+          {
+            "type": "autocomplete",
+            "name": "nightlightScene",
+            "title": {
+              "en": "Nightlight scene"
+            },
+            "placeholder": {
+              "en": "Nightlight scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "lightDiyscene-active.localdevice",
+        "title": {
+          "en": "A specific DIY scene is active"
+        },
+        "titleFormatted": {
+          "en": "The DIY scene [[diyScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active DIY scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=lightDiyScenes.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "diyScene",
+            "title": {
+              "en": "DIY scene"
+            },
+            "placeholder": {
+              "en": "DIY scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "lightscene-active.localdevice",
+        "title": {
+          "en": "A specific light scene is active"
+        },
+        "titleFormatted": {
+          "en": "The light scene [[lightScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active light scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=lightScenes.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "lightScene",
+            "title": {
+              "en": "Light scene"
+            },
+            "placeholder": {
+              "en": "Light scene"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nightlightscene-active.localdevice",
+        "title": {
+          "en": "A specific nightlight scene is active"
+        },
+        "titleFormatted": {
+          "en": "The nightlight scene [[nightlightScene]] !{{Is|Isn't}} active"
+        },
+        "hint": {
+          "en": "Current active nightlight scene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=govee-local-device&capabilities=nightlightScenes.localdevice"
+          },
+          {
+            "type": "autocomplete",
+            "name": "nightlightScene",
+            "title": {
+              "en": "Nightlight scene"
+            },
+            "placeholder": {
+              "en": "Nightlight scene"
+            }
+          }
+        ]
+      }
+    ]
   },
   "drivers": [
+    {
+      "id": "govee-airpurifier",
+      "name": {
+        "en": "Air purifier"
+      },
+      "class": "airpurifier",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.air_purifier",
+        "onoff",
+        "workMode.air_purifier"
+      ],
+      "images": {
+        "small": "/drivers/govee-airpurifier/assets/images/small.png",
+        "large": "/drivers/govee-airpurifier/assets/images/large.png",
+        "xlarge": "/drivers/govee-airpurifier/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
     {
       "id": "govee-appliance",
       "name": {
         "en": "Appliance"
       },
-      "class": "light",
+      "class": "other",
       "icon": "default.svg",
-      "capabilities": [],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "deprecated": true,
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.appliance",
+        "onoff",
+        "measure_temperature",
+        "measure_humidity",
+        "snapshots.appliance",
+        "musicMode.appliance",
+        "workMode.appliance"
+      ],
       "images": {
         "small": "/drivers/govee-appliance/assets/images/small.png",
         "large": "/drivers/govee-appliance/assets/images/large.png",
         "xlarge": "/drivers/govee-appliance/assets/images/xlarge.png"
       },
       "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "govee-aromadiffuser",
+      "name": {
+        "en": "Aroma diffuser"
+      },
+      "class": "diffuser",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.aroma_diffuser",
+        "onoff",
+        "workMode.aroma_diffuser",
+        "lackWater.aroma_diffuser"
+      ],
+      "images": {
+        "small": "/drivers/govee-aromadiffuser/assets/images/small.png",
+        "large": "/drivers/govee-aromadiffuser/assets/images/large.png",
+        "xlarge": "/drivers/govee-aromadiffuser/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "govee-box",
+      "name": {
+        "en": "Box"
+      },
+      "class": "other",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.box",
+        "onoff"
+      ],
+      "images": {
+        "small": "/drivers/govee-box/assets/images/small.png",
+        "large": "/drivers/govee-box/assets/images/large.png",
+        "xlarge": "/drivers/govee-box/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "govee-dehumidifier",
+      "name": {
+        "en": "Dehumidifier"
+      },
+      "class": "dehumidifier",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.dehumidifier",
+        "onoff",
+        "workMode.dehumidifier"
+      ],
+      "images": {
+        "small": "/drivers/govee-dehumidifier/assets/images/small.png",
+        "large": "/drivers/govee-dehumidifier/assets/images/large.png",
+        "xlarge": "/drivers/govee-dehumidifier/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
         {
           "id": "list_devices",
           "template": "list_devices",
@@ -59,16 +2177,218 @@
     {
       "id": "govee-device",
       "name": {
-        "en": "Cloud API Devices"
+        "en": "Light"
       },
       "class": "light",
-      "capabilities": [],
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.light",
+        "onoff",
+        "dim",
+        "light_saturation",
+        "light_hue",
+        "light_temperature",
+        "light_mode",
+        "lightScenes.light",
+        "lightDiyScenes.light",
+        "snapshots.light",
+        "musicMode.light",
+        "dreamViewToggle.light",
+        "segmentControlColor.light",
+        "segmentControlBrightness.light"
+      ],
       "images": {
         "small": "/drivers/govee-device/assets/images/small.png",
         "large": "/drivers/govee-device/assets/images/large.png",
         "xlarge": "/drivers/govee-device/assets/images/xlarge.png"
       },
       "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Advanced UI components"
+          },
+          "children": [
+            {
+              "id": "ui_enhance",
+              "type": "checkbox",
+              "value": false,
+              "hint": {
+                "en": "Enable this option to get additional slider components to interact with light and diy scenes. An App restart is necessary for the changes to become visible"
+              },
+              "label": {
+                "en": "Light Scene components"
+              },
+              "highlight": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "govee-heater",
+      "name": {
+        "en": "Heater"
+      },
+      "class": "heater",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.heater",
+        "onoff",
+        "workMode.heater",
+        "nightlightToggle.heater"
+      ],
+      "images": {
+        "small": "/drivers/govee-heater/assets/images/small.png",
+        "large": "/drivers/govee-heater/assets/images/large.png",
+        "xlarge": "/drivers/govee-heater/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "govee-humidifier",
+      "name": {
+        "en": "Humidifier"
+      },
+      "class": "humidifier",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.humidifier",
+        "onoff",
+        "workMode.humidifier",
+        "nightlightToggle.humidifier",
+        "nightlightScenes.humidifier",
+        "lackWater.humidifier"
+      ],
+      "images": {
+        "small": "/drivers/govee-humidifier/assets/images/small.png",
+        "large": "/drivers/govee-humidifier/assets/images/large.png",
+        "xlarge": "/drivers/govee-humidifier/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Advanced UI components"
+          },
+          "children": [
+            {
+              "id": "ui_enhance",
+              "type": "checkbox",
+              "value": false,
+              "hint": {
+                "en": "Enable this option to get additional slider components to interact with nighlight scenes. An App restart is necessary for the changes to become visible"
+              },
+              "label": {
+                "en": "Nightlight Scene components"
+              },
+              "highlight": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "govee-icemaker",
+      "name": {
+        "en": "Ice maker"
+      },
+      "class": "other",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.ice_maker",
+        "onoff",
+        "lackWater.ice_maker"
+      ],
+      "images": {
+        "small": "/drivers/govee-icemaker/assets/images/small.png",
+        "large": "/drivers/govee-icemaker/assets/images/large.png",
+        "xlarge": "/drivers/govee-icemaker/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
         {
           "id": "list_devices",
           "template": "list_devices",
@@ -90,10 +2410,28 @@
         "en": "Local API devices"
       },
       "class": "light",
-      "capabilities": [
-        "onoff"
+      "platforms": [
+        "local"
       ],
-      "connectivity": [],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_saturation",
+        "light_hue",
+        "light_temperature",
+        "light_mode",
+        "lightScenes.localdevice",
+        "lightDiyScenes.localdevice",
+        "snapshots.localdevice",
+        "musicMode.localdevice",
+        "dreamViewToggle.localdevice",
+        "segmentControlColor.localdevice",
+        "segmentControlBrightness.localdevice"
+      ],
+      "connectivity": [
+        "lan",
+        "cloud"
+      ],
       "images": {
         "small": "/drivers/govee-local-device/assets/images/small.png",
         "large": "/drivers/govee-local-device/assets/images/large.png",
@@ -115,10 +2453,245 @@
           "template": "add_devices"
         }
       ],
-      "id": "govee-local-device"
+      "id": "govee-local-device",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Cloud API enhance"
+          },
+          "children": [
+            {
+              "id": "cloud_enhance",
+              "type": "checkbox",
+              "value": false,
+              "hint": {
+                "en": "Enable this option to enhance the local device with features that are only available through the cloud api (like snapshots or light scenes). This requires a cloud api Key setup in the app settings. An App restart is necessary for the changes to become visible"
+              },
+              "label": {
+                "en": "Cloud API enhance this local device"
+              },
+              "highlight": true
+            },
+            {
+              "id": "ui_enhance",
+              "type": "checkbox",
+              "value": false,
+              "hint": {
+                "en": "Enable this option to get additional slider components to interact with light and diy scenes. An App restart is necessary for the changes to become visible"
+              },
+              "label": {
+                "en": "Light Scene components"
+              },
+              "highlight": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "govee-sensor",
+      "name": {
+        "en": "Sensor"
+      },
+      "class": "sensor",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.sensor",
+        "bodyAppeared.sensor"
+      ],
+      "images": {
+        "small": "/drivers/govee-sensor/assets/images/small.png",
+        "large": "/drivers/govee-sensor/assets/images/large.png",
+        "xlarge": "/drivers/govee-sensor/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "govee-socket",
+      "name": {
+        "en": "Socket"
+      },
+      "class": "socket",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.socket",
+        "onoff"
+      ],
+      "images": {
+        "small": "/drivers/govee-socket/assets/images/small.png",
+        "large": "/drivers/govee-socket/assets/images/large.png",
+        "xlarge": "/drivers/govee-socket/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "govee-thermometer",
+      "name": {
+        "en": "Thermometer"
+      },
+      "class": "sensor",
+      "platforms": [
+        "local",
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "alarm_online.thermometer",
+        "measure_temperature",
+        "measure_humidity"
+      ],
+      "images": {
+        "small": "/drivers/govee-thermometer/assets/images/small.png",
+        "large": "/drivers/govee-thermometer/assets/images/large.png",
+        "xlarge": "/drivers/govee-thermometer/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "api_settings"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": false
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
     }
   ],
   "capabilities": {
+    "alarm_online": {
+      "type": "boolean",
+      "title": {
+        "en": "Offline",
+        "nl": "Offline"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/health.svg"
+    },
+    "bodyAppeared": {
+      "type": "boolean",
+      "title": {
+        "en": "Offline",
+        "nl": "Offline"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null
+    },
+    "dreamViewToggle": {
+      "type": "boolean",
+      "title": {
+        "en": "Dream View"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "gradientToggle": {
+      "type": "boolean",
+      "title": {
+        "en": "Gradient Toggle"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "lackWater": {
+      "type": "boolean",
+      "title": {
+        "en": "Offline",
+        "nl": "Offline"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null
+    },
+    "lightDiyScenes": {
+      "type": "number",
+      "title": {
+        "en": "DIY Scenes"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null,
+      "decimals": 0,
+      "min": 0,
+      "max": 1,
+      "step": 1
+    },
+    "lightScenes": {
+      "type": "number",
+      "title": {
+        "en": "Light Scenes"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null,
+      "decimals": 0,
+      "min": 0,
+      "max": 1,
+      "step": 1
+    },
     "mode": {
       "type": "enum",
       "title": {
@@ -128,6 +2701,77 @@
       "setable": true,
       "uiComponent": "picker",
       "values": []
+    },
+    "musicMode": {
+      "type": "string",
+      "title": {
+        "en": "Music mode"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null
+    },
+    "nightlightScenes": {
+      "type": "number",
+      "title": {
+        "en": "Light Scenes"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "decimals": 0,
+      "min": 0,
+      "max": 1,
+      "step": 1
+    },
+    "nightlightToggle": {
+      "type": "boolean",
+      "title": {
+        "en": "Nightlight"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button"
+    },
+    "segmentControlBrightness": {
+      "type": "number",
+      "title": {
+        "en": "Segment brightness control"
+      },
+      "getable": false,
+      "setable": false,
+      "uiComponent": null
+    },
+    "segmentControlColor": {
+      "type": "number",
+      "title": {
+        "en": "Segment color control"
+      },
+      "getable": false,
+      "setable": false,
+      "uiComponent": null
+    },
+    "snapshots": {
+      "type": "number",
+      "title": {
+        "en": "Snapshots"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null,
+      "decimals": 0,
+      "min": 0,
+      "max": 1,
+      "step": 1
+    },
+    "workMode": {
+      "type": "string",
+      "title": {
+        "en": "Work mode"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null
     }
   }
 }

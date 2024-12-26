@@ -1,6 +1,6 @@
 'use strict';
 
-const GoveeDevice = require('../../api/govee-device')
+const GoveeDevice = require('../../api/govee-device-v2')
 
 class goveeDevice extends GoveeDevice {
   /**
@@ -8,7 +8,7 @@ class goveeDevice extends GoveeDevice {
    */
   async onInit() {
     //Setup the matching capaciltities of this device
-    this.goveedevicetype='device';
+    this.goveedevicetype='light';
     await this.setupDevice();
   }
 
